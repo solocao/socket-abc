@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+
+</head>
+
+<body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+  var socket = io('https://localhost:8088',{ rejectUnauthorized: false,
+    transportOptions: {
+      polling: {
+        extraHeaders: {
+          'x-clientid': 'abc1'
+        }
+      }
+    } });
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
+</body>
+</html>
